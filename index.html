@@ -159,9 +159,10 @@
       <div class="forensic-panel" style="border-left-color: var(--text-gray);">
         <div class="panel-title">> DISPOSITIVOS EN RED INTERNA (ASIGNACIÓN POR MAC)</div>
         <div class="log-line">Asignación IP fija por dirección MAC, conforme a configuración de seguridad de Nexo Media:</div>
-        <div class="log-line">• MAC 3C:A8:2A:11:F0:02 -> 192.168.1.10 -> CONSOLA_PRODUCCIÓN_HUGO</div>
+        <div class="log-line">• MAC 3C:A8:2A:11:F0:02 -> 192.168.1.10 -> CONSOLA_PRODUCCIÓN</div>
         <div class="log-line">• MAC 3C:A8:2A:11:F0:05 -> 192.168.1.12 -> CONSOLA_AUDIO_COMPARTIDA</div>
-        <div class="log-line">• MAC 3C:A8:2A:11:F0:09 -> <span style="color:var(--cyber-amber)">192.168.1.14 -> LAPTOP_ADMIN_CARLA</span></div>
+        <div class="log-line">• MAC 3C:A8:2A:11:F0:09 -> <span style="color:var(--cyber-amber)">192.168.1.14 -> LAPTOP_ADMIN</span></div>
+        <div class="log-line" style="margin-top:8px;font-size:10px;color:var(--text-gray);">* Para identificar al responsable de cada equipo, consulte el inventario de personal del expediente impreso.</div>
       </div>
     </div>
 
@@ -169,14 +170,14 @@
     <div id="view-decrypt" class="module-view">
 
       <div id="lock-screen" class="forensic-panel" style="border-left-color: var(--cyber-red);">
-        <div class="panel-title" style="color: var(--cyber-red);">> ACCESO RESTRINGIDO // TERMINAL CARLA_LAPTOP</div>
+        <div class="panel-title" style="color: var(--cyber-red);">> ACCESO RESTRINGIDO // TERMINAL LAPTOP_ADMIN</div>
         <p class="log-line">El sistema de archivos de la laptop administrativa está encriptado.</p>
         <p class="log-line" style="margin-bottom: 15px;">Se requiere clave de acceso del usuario.</p>
 
         <input type="text" id="pass-input" placeholder="INGRESE CLAVE DE ACCESO..." style="width:100%; padding:12px; background:#090b11; border: 1px solid var(--cyber-red); color:#fff; font-family:monospace; margin-bottom: 12px; text-transform: uppercase;">
         <p id="error-msg" style="color: var(--cyber-red); font-size: 10px; margin-bottom: 10px; display: none;">[X] ERROR: CREDENCIALES INVALIDAS. REINTENTE.</p>
         <button onclick="tryDecrypt()" style="background: var(--cyber-red); color:#fff; border:none; padding:12px; width:100%; font-weight:bold; font-size:11px; cursor: pointer; letter-spacing: 1px;">EJECUTAR DESENCRIPTACIÓN</button>
-        <p style="font-size:9px;color:var(--text-gray);margin-top:10px;">Pista: revisa el registro de mensajes personales de Carla en el expediente impreso — su madre menciona cómo construye sus contraseñas.</p>
+        <p style="font-size:9px;color:var(--text-gray);margin-top:10px;">Pista: revisa el registro de mensajes personales en el expediente impreso — alguien menciona cómo se construyen las contraseñas en esa familia.</p>
       </div>
 
       <div id="success-screen" style="display: none;">
