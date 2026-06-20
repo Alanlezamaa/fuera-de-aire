@@ -103,4 +103,145 @@
   #tab-network:checked ~ nav label[for="tab-network"],
   #tab-decrypt:checked ~ nav label[for="tab-decrypt"] {
     color: var(--cyber-blue);
-    background:
+    background: rgba(0, 229, 255, 0.05);
+    border-bottom: 3px solid var(--cyber-blue);
+    font-weight: bold;
+  }
+
+  .nav-icon { font-size: 18px; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+
+  <input type="radio" id="tab-audio" name="forensic-nav" checked>
+  <input type="radio" id="tab-network" name="forensic-nav">
+  <input type="radio" id="tab-decrypt" name="forensic-nav">
+
+  <header>
+    <div class="logo-area"><span class="status-pulse"></span>FGJ JALISCO // UNIDAD CIBERNÉTICA</div>
+    <div class="case-area">NUC: 09-GDL-2026-PC3 // FORENSIC_OS v1.45</div>
+    <div class="access-badge">[ ACCESO VÁLIDO — NUC: 09-GDL-2026-PC3 ]</div>
+  </header>
+
+  <main>
+
+    <!-- MÓDULO 1: AUDIO RECON -->
+    <div id="view-audio" class="module-view">
+      <div class="forensic-panel">
+        <div class="panel-title">> REPRODUCTOR DE EXTRACCIÓN DE AUDIO</div>
+        <p class="log-line" style="color: var(--cyber-amber);">[!] Archivo aislado de consola de transmisión "Evidencia Nocturna".</p>
+
+        <div style="background:#090b11; padding: 15px; text-align:center; border: 1px dashed var(--cyber-blue); margin: 15px 0; border-radius: 4px;">
+          <p style="font-size: 11px; color: var(--cyber-blue); margin-bottom: 12px; letter-spacing: 1px;">► TRANSMISIÓN_AISLADA.MP3</p>
+          <audio controls style="width: 100%; filter: invert(0.9) hue-rotate(180deg); opacity: 0.85;">
+            <source src="podcast_evidencia.mp3" type="audio/mpeg">
+            Su dispositivo no soporta la reproducción de este audio forense.
+          </audio>
+        </div>
+      </div>
+
+      <div class="forensic-panel">
+        <div class="panel-title">> NOTAS DEL ANALISTA EN ACÚSTICA</div>
+        <p class="log-line">Muestra aislada de la transmisión completa. La anomalía sónica fue detectada originalmente entre las <span class="highlight">22:30:15</span> y las <span class="highlight">22:38:00</span> horas; este fragmento captura el punto de mayor claridad, a los <span class="highlight">22:34:12</span>.</p>
+        <p class="log-line">Patrón sónico compatible con el extractor industrial de la <span class="highlight">Bodega Técnica</span>.</p>
+      </div>
+    </div>
+
+    <!-- MÓDULO 2: LOGS DE RED -->
+    <div id="view-network" class="module-view">
+      <div class="forensic-panel">
+        <div class="panel-title">> SYSADMIN ROUTER LOGS // 11-09-2026</div>
+        <div class="log-line">22:35:01 [DHCP] REQUEST - IP: <span class="highlight">192.168.1.14</span> - MAC: 3C:A8:2A:11:F0:09</div>
+        <div class="log-line">22:35:02 [TRAFFIC] OUTBOUND - TCP:443 -> api.twitter.com</div>
+        <div class="log-line">22:35:02 [PAYLOAD] POST /statuses/update - USER: <span style="color: var(--cyber-red);">@ElCazadorReal</span></div>
+        <div class="log-line" style="color: #39ff14;">[✓] CONEXIÓN INTERNA CONFIRMADA DESDE EL EDIFICIO.</div>
+      </div>
+      <div class="forensic-panel" style="border-left-color: var(--text-gray);">
+        <div class="panel-title">> DISPOSITIVOS EN RED INTERNA (ASIGNACIÓN POR MAC)</div>
+        <div class="log-line">Asignación IP fija por dirección MAC, conforme a configuración de seguridad de Nexo Media:</div>
+        <div class="log-line">• MAC 3C:A8:2A:11:F0:02 -> 192.168.1.10 -> CONSOLA_PRODUCCIÓN_HUGO</div>
+        <div class="log-line">• MAC 3C:A8:2A:11:F0:05 -> 192.168.1.12 -> CONSOLA_AUDIO_COMPARTIDA</div>
+        <div class="log-line">• MAC 3C:A8:2A:11:F0:09 -> <span style="color:var(--cyber-amber)">192.168.1.14 -> LAPTOP_ADMIN_CARLA</span></div>
+      </div>
+    </div>
+
+    <!-- MÓDULO 3: DECRYPTOR -->
+    <div id="view-decrypt" class="module-view">
+
+      <div id="lock-screen" class="forensic-panel" style="border-left-color: var(--cyber-red);">
+        <div class="panel-title" style="color: var(--cyber-red);">> ACCESO RESTRINGIDO // TERMINAL CARLA_LAPTOP</div>
+        <p class="log-line">El sistema de archivos de la laptop administrativa está encriptado.</p>
+        <p class="log-line" style="margin-bottom: 15px;">Se requiere clave de acceso del usuario.</p>
+
+        <input type="text" id="pass-input" placeholder="INGRESE CLAVE DE ACCESO..." style="width:100%; padding:12px; background:#090b11; border: 1px solid var(--cyber-red); color:#fff; font-family:monospace; margin-bottom: 12px; text-transform: uppercase;">
+        <p id="error-msg" style="color: var(--cyber-red); font-size: 10px; margin-bottom: 10px; display: none;">[X] ERROR: CREDENCIALES INVALIDAS. REINTENTE.</p>
+        <button onclick="tryDecrypt()" style="background: var(--cyber-red); color:#fff; border:none; padding:12px; width:100%; font-weight:bold; font-size:11px; cursor: pointer; letter-spacing: 1px;">EJECUTAR DESENCRIPTACIÓN</button>
+        <p style="font-size:9px;color:var(--text-gray);margin-top:10px;">Pista: revisa el registro de mensajes personales de Carla en el expediente impreso — su madre menciona cómo construye sus contraseñas.</p>
+      </div>
+
+      <div id="success-screen" style="display: none;">
+        <div class="forensic-panel" style="border-left-color: #39ff14;">
+          <div class="panel-title" style="color: #39ff14;">> ACCESO CONCEDIDO // DIRECTORIO: /ADMIN/CONFIDENCIAL</div>
+          <p class="log-line" style="color: #39ff14; font-weight: bold; margin-bottom: 10px;">[✓] Desencriptación exitosa. 2 archivos recuperados.</p>
+        </div>
+
+        <div class="forensic-panel">
+          <div class="panel-title">> ARCHIVO 1: REGISTRO_PERSONAL.LOG</div>
+          <div class="log-line">01/08/2026 | Transferencia a cuenta personal (sin clasificar) | -$45,000 MXN</div>
+          <div class="log-line">15/08/2026 | Transferencia a cuenta personal (sin clasificar) | -$75,000 MXN</div>
+          <div class="log-line" style="color: var(--cyber-amber)">* Sin descripción de concepto en ninguna de las dos transacciones.</div>
+        </div>
+
+        <div class="forensic-panel" style="border-left-color: var(--cyber-amber);">
+          <div class="panel-title" style="color: var(--cyber-amber);">> ARCHIVO 2: BORRADOR_NOTA_RAPIDA.TXT</div>
+          <p class="log-line" style="color: #fff; font-style: italic;">"Recordatorio: programar el formateo del servidor de respaldos el viernes a las 23:00, antes de que entre el equipo de auditoría el lunes. No quiero que quede ningún historial de las cuentas de patrocinio ahí."</p>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <nav>
+    <label for="tab-audio">
+      <span class="nav-icon">🎙️</span>
+      <span>AUDIO</span>
+    </label>
+    <label for="tab-network">
+      <span class="nav-icon">🌐</span>
+      <span>RED LOGS</span>
+    </label>
+    <label for="tab-decrypt">
+      <span class="nav-icon">🔐</span>
+      <span>DECRYPT</span>
+    </label>
+  </nav>
+
+  <script>
+    function tryDecrypt() {
+      const input = document.getElementById('pass-input').value.trim().toUpperCase();
+      const lockScreen = document.getElementById('lock-screen');
+      const successScreen = document.getElementById('success-screen');
+      const errorMsg = document.getElementById('error-msg');
+
+      if (input === 'CSR2026') {
+        errorMsg.style.display = 'none';
+        lockScreen.innerHTML = '<div class="panel-title" style="color:var(--cyber-blue)">> DECRYPTING FILES... PLEASE WAIT</div><div style="background:#090b11; height:4px; width:100%; border-radius:2px; overflow:hidden;"><div style="background:var(--cyber-blue); height:100%; width:40%; animation: load 1s forwards linear;"></div></div>';
+
+        setTimeout(() => {
+          lockScreen.style.display = 'none';
+          successScreen.style.display = 'block';
+        }, 1200);
+      } else {
+        errorMsg.style.display = 'block';
+        document.getElementById('pass-input').value = '';
+      }
+    }
+  </script>
+
+  <style>
+    @keyframes load { to { width: 100%; } }
+  </style>
+
+</body>
+</html>
