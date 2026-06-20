@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FGJ - Extracción Forense Móvil</title>
+<style>
+  :root {
+    --bg-dark: #090a0f;
+    --panel-dark: #121620;
+    --cyber-amber: #ffb300;
+    --cyber-blue: #00e5ff;
+    --cyber-red: #ff3333;
+    --text-gray: #8896aa;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Courier New', monospace; }
+
+  body {
+    background-color: var(--bg-dark);
+    color: #ffffff;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  header {
+    background: linear-gradient(180deg, #0f121a 0%, var(--bg-dark) 100%);
+    border-bottom: 2px solid var(--cyber-amber);
+    padding: 15px;
+    text-align: center;
+  }
+
+  .logo-area { font-size: 11px; color: var(--cyber-amber); font-weight: bold; letter-spacing: 2px; }
+  .case-area { font-size: 13px; color: #fff; margin-top: 5px; font-weight: bold; }
+  
+  .status-pulse {
+    display: inline-block; width: 8px; height: 8px; background: #ff3333; 
+    border-radius: 50%; margin-right: 5px; animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse { 0% { opacity: 0.4; } 50% { opacity: 1; } 100% { opacity: 0.4; } }
+
+  main { flex: 1; padding: 20px; overflow-y: auto; }
+  .module-view { display: none; }
+
+  #tab-chat:checked ~ main #view-chat,
+  #tab-camera:checked ~ main #view-camera,
+  #tab-identity:checked ~ main #view-identity { display: block; }
+  input[type="radio"] { display: none; }
+
+  .forensic-panel {
+    background: var(--panel-dark);
+    border: 1px solid #1f2635;
+    border-left: 4px solid var(--cyber-amber);
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+  }
+
+  .panel-title { font-size: 12px; color: var(--cyber-amber); margin-bottom: 12px; font-weight: bold; }
+  .log-line { font-size: 11px; color: var(--text-gray); line-height: 1.6; margin-bottom: 6px; }
+  .highlight { color: #fff; font-weight: bold; }
+
+  /* Burbujas de Chat Forense */
+  .chat-box { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+  .msg { max-width: 85%; padding: 8px 12px; font-size: 11px; border-radius: 4px; line-height: 1.4; }
+  .msg.incoming { background: #1a2233; color: #fff; align-self: flex-start; border-left: 2px solid var(--cyber-blue); }
+  .msg.outgoing { background: #2c2514; color: #ffe0b2; align-self: flex-end; border-right: 2px solid var(--cyber-amber); }
+  .msg-time { font-size: 8px; color: rgba(255,255,255,0.4); margin-top: 4px; text-align: right; }
+
+  /* Navegación Inferior */
+  nav { display: flex; background: #0f121a; border-top: 1px solid #1f2635; height: 65px; }
+  nav label {
+    flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+    font-size: 10px; color: var(--text-gray); cursor: pointer; transition: all 0.3s;
+    border-bottom: 3px solid transparent;
+  }
+
+  #tab-chat:checked ~ nav label[for="tab-chat"],
+  #tab-camera:checked ~ nav label[for="tab-camera"],
+  #tab-identity:checked ~ nav label[for="tab-identity"] {
+    color: var(--cyber-amber);
+    background: rgba(255, 179, 0, 0.05);
+    border-bottom: 3px solid var(--cyber-amber);
+    font-weight: bold;
+  }
+  .nav-icon { font-size: 18px; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+
+  <input type="radio" id="tab-chat" name="forensic-nav" checked>
+  <input type="radio" id="tab-camera" name="forensic-nav">
+  <input type="radio" id="tab-identity" name="forensic-nav">
+
+  <header>
+    <div class="logo-area"><span class="status-pulse"></span>FGJ JALISCO // EXTRACCIÓN TELEFÓNICA</div>
+    <div class="case-area">NUC: 04-GDL-2026-M5 // SIM_RECON_v2.11</div>
+  </header>
+
+  <main>
+    
+    <div id="view-chat" class="module-view">
+      <div class="forensic-panel">
+        <div class="panel-title">> DISPOSITIVO OBJETIVO: E. MARÍN // EXTRACCIÓN SMS</div>
+        <p class="log-line" style="color: var(--cyber-blue);">[✓] Descarga completa de hilos borrados con terminal prepago 33 8847 2210.</p>
+        
+        <div class="chat-box">
+          <div class="msg incoming">
+            Ya sabes lo que tienes que hacer. No voy a esperar más, Elisa. Nos quitaron el negocio de Tlaquepaque por su culpa, es hora de pagar.
+            <div class="msg-time">08/09/2026 — 09:15</div>
+          </div>
+          <div class="msg outgoing">
+            Por favor, dame tiempo. No es tan fácil como crees. Él siempre carga su EpiPen en el saco.
+            <div class="msg-time">08/09/2026 — 09:20</div>
+          </div>
+          <div class="msg incoming">
+            Hoy es el día. Tú decides si seguimos siendo los que perdemos todo. Te dejé el juguete de plástico en el rack de vinos de la entrada a las 17:30. Cámbiaselo en la mesa mientras explicas el maridaje.
+            <div class="msg-time">11/09/2026 — 13:10</div>
+          </div>
+          <div class="msg outgoing">
+            Está bien. Ya tengo lo que pediste. El consomé sale a las 21:50.
+            <div class="msg-time">11/09/2026 — 13:18</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="view-camera" class="module-view">
+      <div class="forensic-panel">
+        <div class="panel-title">> SISTEMA DE RECONSTRUCCIÓN TIMESTAMPS // CAM-03</div>
+        <p class="log-line">La bitácora física reporta obstrucción parcial por vajilla de las 21:41:00 a las 21:42:30.</p>
+        <p class="log-line" style="margin-bottom: 12px;">Haga clic abajo para correr el script de metadatos del sensor magnético de la puerta del almacén.</p>
+        
+        <button onclick="runFilter()" id="btn-filter" style="background: var(--cyber-amber); color:#000; border:none; padding:12px; width:100%; font-weight:bold; font-size:11px; cursor: pointer; letter-spacing: 1px;">FORZAR RECONSTRUCCIÓN DIGITAL</button>
+        
+        <div id="camera-results" style="display:none; margin-top:15px; border-top: 1px dashed #334155; padding-top:15px;">
+          <p class="log-line" style="color: #39ff14;">[✓] METADATOS CORRELACIONADOS EN VENTANA OSCURA:</p>
+          <div class="log-line">21:41:12 [MAGNETIC_SENSOR] -> PUERTA ALMACÉN ALÉRGENOS: <span class="highlight" style="color:var(--cyber-red)">APERTURA</span></div>
+          <div class="log-line">21:41:15 [KEYPAD] -> CÓDIGO INGRESADO: <span class="highlight">P-04 (Elisa Marín)</span></div>
+          <div class="log-line">21:41:34 [MAGNETIC_SENSOR] -> PUERTA ALMACÉN ALÉRGENOS: <span class="highlight">CIERRE</span></div>
+          <p class="notebox" style="font-size:10px; color:#fff; border-left-color: var(--cyber-red); margin-top:10px; background:#0f121a;">
+            Evidencia concluyente: Elisa mintió en su acta. Entró al almacén de alérgenos por el fondo concentrado de camarón durante los 90 segundos que la vajilla tapaba la cámara.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div id="view-identity" class="module-view">
+      <div class="forensic-panel" style="border-left-color: var(--cyber-red);">
+        <div class="panel-title" style="color: var(--cyber-red);">> RASTREO CNIE // TITULAR DE LÍNEA PREPAGO</div>
+        <p class="log-line">La línea 33 8847 2210 no cuenta con registro de nombre oficial en contratos.</p>
+        <p class="log-line" style="margin-bottom: 15px;">Ingrese el código de empleado del cómplice interno para vincular el registro de nómina del sospechoso externo:</p>
+        
+        <input type="text" id="id-input" placeholder="INGRESE CÓDIGO DE ACCESO (P-XX)..." style="width:100%; padding:12px; background:#090b11; border: 1px solid var(--cyber-red); color:#fff; font-family:monospace; margin-bottom: 12px; text-transform: uppercase;">
+        <p id="error-id" style="color: var(--cyber-red); font-size: 10px; margin-bottom: 10px; display: none;">[X] ERROR: CÓDIGO SIN COINCIDENCIA DE RED.</p>
+        
+        <button onclick="findOwner()" style="background: var(--cyber-red); color:#fff; border:none; padding:12px; width:100%; font-weight:bold; font-size:11px; cursor: pointer;">SOLICITAR VÍNCULO CNIE</button>
+      </div>
+
+      <div id="owner-results" style="display:none;">
+        <div class="forensic-panel" style="border-left-color: #39ff14;">
+          <div class="panel-title" style="color: #39ff14;">> REGISTRO ASOCIADO LOCALIZADO</div>
+          <div class="log-line">Cruce de base de datos de proveedores de Ánima con antena Periférico Norte exitoso.</div>
+          <div class="log-line">Nombre: <span class="highlight" style="color:#fff">RODRIGO CUEVAS</span></div>
+          <div class="log-line">Puesto: Representante Legal de Vinos del Bajío S.A.</div>
+          <div class="log-line">Estatus: Ex-propietario de "El Rincón de Tlaquepaque" (Clausurado en 2022 por reseña de R. Solórzano).</div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <nav>
+    <label for="tab-chat">
+      <span class="nav-icon">💬</span>
+      <span>EXTRACCIÓN</span>
+    </label>
+    <label for="tab-camera">
+      <span class="nav-icon">🎥</span>
+      <span>FILTRO CAM</span>
+    </label>
+    <label for="tab-identity">
+      <span class="nav-icon">🆔</span>
+      <span>VÍNCULO</span>
+    </label>
+  </nav>
+
+  <script>
+    function runFilter() {
+      const btn = document.getElementById('btn-filter');
+      const results = document.getElementById('camera-results');
+      btn.innerText = "PROCESANDO FOTOGRAMAS...";
+      setTimeout(() => {
+        btn.style.display = 'none';
+        results.style.display = 'block';
+      }, 1000);
+    }
+
+    function findOwner() {
+      const input = document.getElementById('id-input').value.trim().toUpperCase();
+      const error = document.getElementById('error-id');
+      const results = document.getElementById('owner-results');
+
+      if (input === 'P-04') {
+        error.style.display = 'none';
+        results.style.display = 'block';
+      } else {
+        error.style.display = 'block';
+        results.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>
