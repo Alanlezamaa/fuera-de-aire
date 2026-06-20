@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FGJ - Terminal Forense Digital</title>
 <style>
-  /* Variables de diseño forense */
   :root {
     --bg-dark: #0a0c10;
     --panel-dark: #141822;
@@ -26,7 +25,6 @@
     overflow: hidden;
   }
 
-  /* Encabezado del Sistema */
   header {
     background: linear-gradient(180deg, #10141e 0%, var(--bg-dark) 100%);
     border-bottom: 2px solid var(--cyber-blue);
@@ -37,6 +35,16 @@
 
   .logo-area { font-size: 11px; color: var(--cyber-blue); font-weight: bold; letter-spacing: 2px; }
   .case-area { font-size: 13px; color: #fff; margin-top: 5px; font-weight: bold; }
+  .access-badge {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 9px;
+    color: #39ff14;
+    border: 1px solid #39ff14;
+    padding: 3px 10px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+  }
   .status-pulse {
     display: inline-block; width: 8px; height: 8px; background: #39ff14; 
     border-radius: 50%; margin-right: 5px; animation: pulse 1.5s infinite;
@@ -44,7 +52,6 @@
 
   @keyframes pulse { 0% { opacity: 0.3; } 50% { opacity: 1; } 100% { opacity: 0.3; } }
 
-  /* Área de Contenido Principal */
   main {
     flex: 1;
     padding: 20px;
@@ -53,14 +60,12 @@
 
   .module-view { display: none; }
 
-  /* Lógica de pestañas con Radio Buttons (Cero JavaScript para navegación) */
   #tab-audio:checked ~ main #view-audio,
   #tab-network:checked ~ main #view-network,
   #tab-decrypt:checked ~ main #view-decrypt { display: block; }
 
   input[type="radio"] { display: none; }
 
-  /* Estilos de los Módulos de Evidencia */
   .forensic-panel {
     background: var(--panel-dark);
     border: 1px solid #222c3c;
@@ -74,7 +79,6 @@
   .log-line { font-size: 11px; color: var(--text-gray); line-height: 1.5; margin-bottom: 6px; }
   .highlight { color: #fff; font-weight: bold; }
 
-  /* Menú de Navegación Inferior Móvil */
   nav {
     display: flex;
     background: #10141e;
@@ -99,148 +103,4 @@
   #tab-network:checked ~ nav label[for="tab-network"],
   #tab-decrypt:checked ~ nav label[for="tab-decrypt"] {
     color: var(--cyber-blue);
-    background: rgba(0, 229, 255, 0.05);
-    border-bottom: 3px solid var(--cyber-blue);
-    font-weight: bold;
-  }
-
-  .nav-icon { font-size: 18px; margin-bottom: 4px; }
-</style>
-</head>
-<body>
-
-  <input type="radio" id="tab-audio" name="forensic-nav" checked>
-  <input type="radio" id="tab-network" name="forensic-nav">
-  <input type="radio" id="tab-decrypt" name="forensic-nav">
-
-  <header>
-    <div class="logo-area"><span class="status-pulse"></span>FGJ JALISCO // UNIDAD CIBERNÉTICA</div>
-    <div class="case-area">NUC: 09-GDL-2026-PC3 // FORENSIC_OS v1.45</div>
-  </header>
-
-  <main>
-    
-    <!-- MÓDULO 1: AUDIO RECON -->
-    <div id="view-audio" class="module-view">
-      <div class="forensic-panel">
-        <div class="panel-title">> REPRODUCTOR DE EXTRACCIÓN DE AUDIO</div>
-        <p class="log-line" style="color: var(--cyber-amber);">[!] Archivo aislado de consola de transmisión "Evidencia Nocturna".</p>
-        
-        <div style="background:#090b11; padding: 15px; text-align:center; border: 1px dashed var(--cyber-blue); margin: 15px 0; border-radius: 4px;">
-          <p style="font-size: 11px; color: var(--cyber-blue); margin-bottom: 12px; letter-spacing: 1px;">► TRANSMISIÓN_AISLADA.MP3</p>
-          <audio controls style="width: 100%; filter: invert(0.9) hue-rotate(180deg); opacity: 0.85;">
-            <source src="podcast_evidencia.mp3" type="audio/mpeg">
-            Su dispositivo no soporta la reproducción de este audio forense.
-          </audio>
-        </div>
-      </div>
-
-      <div class="forensic-panel">
-        <div class="panel-title">> NOTAS DEL ANALISTA EN ACÚSTICA</div>
-        <p class="log-line">Frecuencia de fondo aislada a los <span class="highlight">22:34:12</span>.</p>
-        <p class="log-line">Se detecta patrón sónico compatible con extractor mecánico de la <span class="highlight">Cabina B</span>.</p>
-      </div>
-    </div>
-
-    <!-- MÓDULO 2: LOGS DE RED -->
-    <div id="view-network" class="module-view">
-      <div class="forensic-panel">
-        <div class="panel-title">> SYSADMIN ROUTER LOGS // 11-09-2026</div>
-        <div class="log-line">22:35:01 [DHCP] REQUEST - IP: <span class="highlight">192.168.1.45</span></div>
-        <div class="log-line">22:35:02 [TRAFFIC] OUTBOUND - TCP:443 -> api.twitter.com</div>
-        <div class="log-line">22:35:02 [PAYLOAD] POST /statuses/update - USER: <span style="color: var(--cyber-red);">@ElCazadorReal</span></div>
-        <div class="log-line" style="color: #39ff14;">[✓] CONEXIÓN INTERNA CONFIRMADA DESDE EL EDIFICIO.</div>
-      </div>
-      <div class="forensic-panel" style="border-left-color: var(--text-gray);">
-        <div class="panel-title">> DISPOSITIVOS EN RED INTERNA (MÉTRICA)</div>
-        <div class="log-line">Asignación IP fija por Mac Address de la empresa:</div>
-        <div class="log-line">• 192.168.1.10 -> CONSOLA_AUDIO_PRINCIPAL</div>
-        <div class="log-line">• 192.168.1.12 -> PC_PRODUCCIÓN_HUGO</div>
-        <div class="log-line">• 192.168.1.45 -> <span style="color:var(--cyber-amber)">LAPTOP_ADMIN_CARLA</span></div>
-      </div>
-    </div>
-
-    <!-- MÓDULO 3: DECRYPTOR -->
-    <div id="view-decrypt" class="module-view">
-      
-      <!-- PANTALLA DE BLOQUEO (Se oculta al descifrar) -->
-      <div id="lock-screen" class="forensic-panel" style="border-left-color: var(--cyber-red);">
-        <div class="panel-title" style="color: var(--cyber-red);">> ACCESO RESTRINGIDO // TERMINAL CARLA_LAPTOP</div>
-        <p class="log-line">El sistema de archivos de Lerín Producciones está encriptado.</p>
-        <p class="log-line" style="margin-bottom: 15px;">Se requiere clave RSA de administración de marketing.</p>
-        
-        <input type="text" id="pass-input" placeholder="INGRESE CLAVE DE ACCESO..." style="width:100%; padding:12px; background:#090b11; border: 1px solid var(--cyber-red); color:#fff; font-family:monospace; margin-bottom: 12px; text-transform: uppercase;">
-        <p id="error-msg" style="color: var(--cyber-red); font-size: 10px; margin-bottom: 10px; display: none;">[X] ERROR: CREDENCIALES INVALIDAS. REINTENTE.</p>
-        <button onclick="tryDecrypt()" style="background: var(--cyber-red); color:#fff; border:none; padding:12px; width:100%; font-weight:bold; font-size:11px; cursor: pointer; letter-spacing: 1px;">EJECUTAR DESENCRIPTACIÓN</button>
-      </div>
-
-      <!-- PANTALLA EXITO (Oculta por defecto) -->
-      <div id="success-screen" style="display: none;">
-        <div class="forensic-panel" style="border-left-color: #39ff14;">
-          <div class="panel-title" style="color: #39ff14;">> ACCESO CONCEDIDO // DIRECTORIO: /MARKETING/CONFIDENCIAL</div>
-          <p class="log-line" style="color: #39ff14; font-weight: bold; margin-bottom: 10px;">[✓] Decryption successful. 2 archivos recuperados.</p>
-        </div>
-
-        <div class="forensic-panel">
-          <div class="panel-title">> ARCHIVO 1: CONTABILIDAD_PARALELA.LOG</div>
-          <div class="log-line">01/08/2026 | Desvío Fondo Patrocinio -> Cuenta Privada Banamex | -$45,000 MXN</div>
-          <div class="log-line">15/08/2026 | Desvío Fondo Patrocinio -> Cuenta Privada Banamex | -$75,000 MXN</div>
-          <div class="log-line" style="color: var(--cyber-amber)">* Alerta: Auditoría programada por M. Lerín para el lunes 14/09.</div>
-        </div>
-
-        <div class="forensic-panel" style="border-left-color: var(--cyber-amber);">
-          <div class="panel-title" style="color: var(--cyber-amber);">> ARCHIVO 2: BORRADOR_NOTA_RAPIDA.TXT</div>
-          <p class="log-line" style="color: #fff; font-style: italic;">"El servidor central debe quedar formateado el viernes a las 23:00. Para esa hora, el problema con Max y las cuentas ya estará permanentemente resuelto."</p>
-        </div>
-      </div>
-
-    </div>
-
-  </main>
-
-  <!-- MENÚ INFERIOR TÁCTIL -->
-  <nav>
-    <label for="tab-audio">
-      <span class="nav-icon">🎙️</span>
-      <span>AUDIO</span>
-    </label>
-    <label for="tab-network">
-      <span class="nav-icon">🌐</span>
-      <span>RED LOGS</span>
-    </label>
-    <label for="tab-decrypt">
-      <span class="nav-icon">🔐</span>
-      <span>DECRYPT</span>
-    </label>
-  </nav>
-
-  <!-- LÓGICA DE DETECCIÓN INTERACTIVA -->
-  <script>
-    function tryDecrypt() {
-      const input = document.getElementById('pass-input').value.trim().toUpperCase();
-      const lockScreen = document.getElementById('lock-screen');
-      const successScreen = document.getElementById('success-screen');
-      const errorMsg = document.getElementById('error-msg');
-
-      // Cambia aquí la contraseña si quieres otra para el juego
-      if (input === 'CSR2026') {
-        errorMsg.style.display = 'none';
-        lockScreen.innerHTML = '<div class="panel-title" style="color:var(--cyber-blue)">> DECRYPTING FILES... PLEASE WAIT</div><div style="background:#090b11; height:4px; width:100%; border-radius:2px; overflow:hidden;"><div style="background:var(--cyber-blue); height:100%; width:40%; animation: load 1s forwards linear;"></div></div>';
-        
-        setTimeout(() => {
-          lockScreen.style.display = 'none';
-          successScreen.style.display = 'block';
-        }, 1200);
-      } else {
-        errorMsg.style.display = 'block';
-        document.getElementById('pass-input').value = '';
-      }
-    }
-  </script>
-
-  <style>
-    @keyframes load { to { width: 100%; } }
-  </style>
-
-</body>
-</html>
+    background:
