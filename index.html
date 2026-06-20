@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FGJ - Terminal Forense Digital</title>
+<style>
+  /* Variables de diseño forense */
+  :root {
+    --bg-dark: #0a0c10;
+    --panel-dark: #141822;
+    --cyber-blue: #00e5ff;
+    --cyber-red: #ff3333;
+    --cyber-amber: #ffb300;
+    --text-gray: #8a99ad;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Courier New', monospace; }
+
+  body {
+    background-color: var(--bg-dark);
+    color: #ffffff;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Encabezado del Sistema */
+  header {
+    background: linear-gradient(180deg, #10141e 0%, var(--bg-dark) 100%);
+    border-bottom: 2px solid var(--cyber-blue);
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 229, 255, 0.1);
+  }
+
+  .logo-area { font-size: 11px; color: var(--cyber-blue); font-weight: bold; letter-spacing: 2px; }
+  .case-area { font-size: 13px; color: #fff; margin-top: 5px; font-weight: bold; }
+  .status-pulse {
+    display: inline-block; width: 8px; height: 8px; background: #39ff14; 
+    border-radius: 50%; margin-right: 5px; animation: pulse 1.5s infinite;
+  }
+
+  @keyframes pulse { 0% { opacity: 0.3; } 50% { opacity: 1; } 100% { opacity: 0.3; } }
+
+  /* Área de Contenido Principal */
+  main {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+  }
+
+  .module-view { display: none; }
+
+  /* Lógica de pestañas con Radio Buttons (Cero JavaScript para navegación) */
+  #tab-audio:checked ~ main #view-audio,
+  #tab-network:checked ~ main #view-network,
+  #tab-decrypt:checked ~ main #view-decrypt { display: block; }
+
+  input[type="radio"] { display: none; }
+
+  /* Estilos de los Módulos de Evidencia */
+  .forensic-panel {
+    background: var(--panel-dark);
+    border: 1px solid #222c3c;
+    border-left: 4px solid var(--cyber-blue);
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+  }
+
+  .panel-title { font-size: 12px; color: var(--cyber-blue); margin-bottom: 10px; font-weight: bold; }
+  .log-line { font-size: 11px; color: var(--text-gray); line-height: 1.5; margin-bottom: 6px; }
+  .highlight { color: #fff; font-weight: bold; }
+
+  /* Menú de Navegación Inferior Móvil */
+  nav {
+    display: flex;
+    background: #10141e;
+    border-top: 1px solid #222c3c;
+    height: 65px;
+  }
+
+  nav label {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: var(--text-gray);
+    cursor: pointer;
+    transition: all 0.3s;
+    border-bottom: 3px solid transparent;
+  }
+
+  /* Efecto activo cuando el jugador presiona un botón del menú */
+  #tab-audio:checked ~ nav label[for="tab-audio"],
+  #tab-network:checked ~ nav label[for="tab-network"],
+  #tab-decrypt:checked ~ nav label[for="tab-decrypt"] {
+    color: var(--cyber-blue);
+    background: rgba(0, 229, 255, 0.05);
+    border-bottom: 3px solid var(--cyber-blue);
+    font-weight: bold;
+  }
+
+  .nav-icon { font-size: 18px; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+
+  <!-- Selectores ocultos que controlan las pantallas -->
+  <input type="radio" id="tab-audio" name="forensic-nav" checked>
+  <input type="radio" id="tab-network" name="forensic-nav">
+  <input type="radio" id="tab-decrypt" name="forensic-nav">
+
+  <!-- ENCABEZADO FIJO -->
+  <header>
+    <div class="logo-area"><span class="status-pulse"></span>FGJ JALISCO // UNIDAD CIBERNÉTICA</div>
+    <div class="case-area">NUC: 09-GDL-2026-PC3 // FORENSIC_OS v1.45</div>
+  </header>
+
+  <!-- PANTALLA DINÁMICA -->
+  <main>
+    
+    <!-- MÓDULO 1: AUDIO RECON -->
+    <div id="view-audio" class="module-view">
+      <div class="forensic-panel">
+        <div class="panel-title">> REPRODUCTOR DE EXTRACCIÓN DE AUDIO</div>
+        <p class="log-line" style="color: var(--cyber-amber);">[!] Archivo aislado de consola de transmisión "Evidencia Nocturna".</p>
+        <!-- Aquí irá tu etiqueta de audio en el futuro -->
+        <div style="background:#090b11; padding: 20px; text-align:center; border: 1px dashed var(--cyber-blue); margin: 15px 0; font-size:12px;">
+          🔊 [ AUDIO_PRE-COLLAPSE_LOG.MP3 ]
+        </div>
+      </div>
+      <div class="forensic-panel">
+        <div class="panel-title">> NOTAS DEL ANALISTA EN ACÚSTICA</div>
+        <p class="log-line">Frecuencia de fondo aislada a los <span class="highlight">22:34:12</span>.</p>
+        <p class="log-line">Se detecta patrón sónico compatible con extractor mecánico de la <span class="highlight">Cabina B</span>.</p>
+      </div>
+    </div>
+
+    <!-- MÓDULO 2: LOGS DE RED -->
+    <div id="view-network" class="module-view">
+      <div class="forensic-panel">
+        <div class="panel-title">> SYSADMIN ROUTER LOGS // 11-09-2026</div>
+        <div class="log-line">22:35:01 [DHCP] REQUEST - IP: <span class="highlight">192.168.1.45</span></div>
+        <div class="log-line">22:35:02 [TRAFFIC] OUTBOUND - TCP:443 -> api.twitter.com</div>
+        <div class="log-line">22:35:02 [PAYLOAD] POST /statuses/update - USER: <span style="color: var(--cyber-red);">@ElCazadorReal</span></div>
+        <div class="log-line" style="color: #39ff14;">[✓] CONEXIÓN INTERNA CONFIRMADA DESDE EL EDIFICIO.</div>
+      </div>
+    </div>
+
+    <!-- MÓDULO 3: DECRYPTOR -->
+    <div id="view-decrypt" class="module-view">
+      <div class="forensic-panel" style="border-left-color: var(--cyber-red);">
+        <div class="panel-title" style="color: var(--cyber-red);">> ACCESO RESTRINGIDO // TERMINAL CARLA_LAPTOP</div>
+        <p class="log-line">El sistema de archivos de Lerín Producciones está encriptado.</p>
+        <p class="log-line" style="margin-bottom: 15px;">Se requiere contraseña del administrador de marketing.</p>
+        
+        <!-- Input de prueba interactivo simulado -->
+        <input type="password" placeholder="INGRESE CLAVE..." style="width:100%; padding:10px; background:#090b11; border: 1px solid var(--cyber-red); color:#fff; font-family:monospace; margin-bottom: 10px;">
+        <button style="background: var(--cyber-red); color:#fff; border:none; padding:10px; width:100%; font-weight:bold; font-size:11px;">EJECUTAR FUERZA BRUTA</button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- MENÚ INFERIOR TÁCTIL -->
+  <nav>
+    <label for="tab-audio">
+      <span class="nav-icon">🎙️</span>
+      <span>AUDIO</span>
+    </label>
+    <label for="tab-network">
+      <span class="nav-icon">🌐</span>
+      <span>RED LOGS</span>
+    </label>
+    <label for="tab-decrypt">
+      <span class="nav-icon">🔐</span>
+      <span>DECRYPT</span>
+    </label>
+  </nav>
+
+</body>
+</html>
